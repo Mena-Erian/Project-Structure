@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections;
 
@@ -104,45 +106,93 @@ namespace Project_Structure
     public class Program
     {
         // Entry Point
-        public static void Main(string[] args)
+        public static void Main()
         {
-            var builder = WebApplication.CreateBuilder();
-            builder.Services.AddControllersWithViews();
+            var builder = WebApplication.CreateBuilder(); // Use builder Design Pattern
 
+            #region Configure Service
+
+            //builder.Services.AddControllers(); // Register APIs Required Services
+            //                                    (Controller Activation, Model Binding, Action Filter, and etc.) To Dependance injection Container
+
+
+            builder.Services.AddControllersWithViews();// Register MVC Required Services
+            //                                    (Controller Activation, Model Binding, Action Filter,Views,Configuration and etc.) To Dependance injection Container
+
+            //builder.Services.AddRazorPages();// Register MVC Required Services
+
+            //builder.Services.AddMvc();
+            #endregion
 
 
             var app = builder.Build();
 
-
-
-
+            #region Configure
             /// builder.Services.AddScoped<ApplicationDbContext>(option => option.UseSqlServer("ConnectionStr"));    // use one object as long as you in the same request
             /// builder.Services.AddScoped<ProductRepository>();
             /// builder.Services.AddScoped<CategoryRepository>();
             /// builder.Services.AddScoped<ProductService>();
 
+            app.UseRouting();
+            app.UseStaticFiles();//Enables static file serving for the current request path
 
-            //app.UseRouting();
-
-            app.MapGet("/", () => "Hello World!");
+            //app.MapGet("/", () => "Hello World!");
+            //app.MapGet("/Home", () => "Hello Home World!");
+            //app.MapGet("/About", () => "Hello About World!");
+            //app.MapGet("/*", () => "Hello ***********About World!");
 
             app.MapPost("/Hamada", async (context) =>
             {
-                await context.Response.WriteAsync("Hello Hamada");
+                await context.Response.WriteAsync("");
             });
+
+            app.MapGet("/XX{id:int}", async (context) =>
+            {
+                await context.Response.WriteAsync($"Id = {context.Request.RouteValues["id"]}");
+            });
+
+            /// app.MapGet("/Movies/GetMovie/{id}", async (context) =>
+            /// {
+            ///     await context.Response.WriteAsync($"Id = {context.Request.RouteValues["id"]}");
+            /// });
+
+            app.MapGet("/Hamada", async (context) =>
+            {
+                await context.Response.WriteAsync("Hello Hamada get");
+            });
+
+            //app.MapGet("/d", async d => await d.Response.WriteAsync($"{d.User.Claims.FirstOrDefault()}"));
 
             app.MapGet("/test", async (context) =>
             {
                 await context.Response.WriteAsync("{ a: 1 }");
             });
 
+
+
+            /// app/*endpoint.*/.MapGet("/Rd", new RequestDelegate(async (context) =>
+            /// {
+            ///     await context.Response.WriteAsync("Hello Rd");
+            /// }));
+
+            app/*endpoint.*/.MapGet("/Rd", async (context) =>
+            {
+                await context.Response.WriteAsync("Hello Rd");
+            });
+
+
+
             app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller}/{action}/{id?}"
+                name: "default",//        1      /   2     <== should named this specific
+                                //pattern/*urlPath*/: "{controller}/{action}/{id?}"
+                pattern/*urlPath*/: "{controller=Home}/{action=Index}/{id?}"
+                //defaults: new { Controller = "Movies", action = "Index" }
+                //constraints: new { id = new IntRouteConstraint() }
+
                 );
 
 
-            if(app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -150,11 +200,11 @@ namespace Project_Structure
             {
                 app.UseStatusCodePagesWithReExecute("/Home/Error");
             }
-            app.UseRouting();
 
-         
 
-                app.Run();
+            #endregion
+
+            app.Run();
 
         }
         /// public void Config(IServiceCollection services)

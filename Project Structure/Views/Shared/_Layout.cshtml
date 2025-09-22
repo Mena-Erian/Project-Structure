@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>@ViewBag.Title</title>
+	<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+	@* Start Header *@
+	<header class="d-flex justify-content-center align-items-center mt-5">
+		<nav>
+			@* 1.HTML Tag *@
+			@* <a class="btn btn-primary" href="/Home/Index">Home</a> *@
+
+			@* 2.HTML Helpers*@
+			@Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-primary" });
+			@* @Html.BeginForm();
+			@Html.CheckBox();
+			@Html.TextBox(); *@
+
+			@* 3. Tag Helpers *@
+			@* <a class="btn btn-primary" href="/Home/AboutUs">About Us</a> *@
+
+			<a class="btn btn-primary" asp-controller="Home" asp-route-id="20" asp-action="AboutUs">About Us</a>
+			<a class="btn btn-primary" asp-controller="Home" asp-action="Privacy">Privacy</a>
+			<a class="btn btn-primary" asp-controller="Home" asp-action="ContentUs">Content Us</a>
+			<a class="btn btn-success" asp-controller="Accounts" asp-action="SignIn">Sign In</a>
+			<a class="btn btn-danger" asp-controller="Accounts" asp-action="SignUp">Sign Up</a>
+		</nav>
+	</header>
+	@RenderBody()
+	<footer class="d-flex justify-content-center align-items-center mt-5">
+		<div>
+			<p>CopyRights &Copy; Codewithmena@gmail.com @DateTime.Now.Year </p>
+		</div>
+	</footer>
+
+	@*@if (@ViewBag.Title == "Home")
+		@RenderSection("Test"); *@
+
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
