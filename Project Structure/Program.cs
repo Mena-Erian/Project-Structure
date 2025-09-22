@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections;
 
@@ -110,7 +111,17 @@ namespace Project_Structure
             var builder = WebApplication.CreateBuilder(); // Use builder Design Pattern
 
             #region Configure Service
-            builder.Services.AddControllersWithViews();
+
+            //builder.Services.AddControllers(); // Register APIs Required Services
+            //                                    (Controller Activation, Model Binding, Action Filter, and etc.) To Dependance injection Container
+
+
+            builder.Services.AddControllersWithViews();// Register MVC Required Services
+            //                                    (Controller Activation, Model Binding, Action Filter,Views, and etc.) To Dependance injection Container
+
+            //builder.Services.AddRazorPages();// Register MVC Required Services
+
+            //builder.Services.AddMvc();
             #endregion
 
 
@@ -124,16 +135,25 @@ namespace Project_Structure
 
             app.UseRouting();
 
-            app.MapGet("/", () => "Hello World!");
+            //app.MapGet("/", () => "Hello World!");
             app.MapGet("/Home", () => "Hello Home World!");
             //app.MapGet("/About", () => "Hello About World!");
             //app.MapGet("/*", () => "Hello ***********About World!");
 
             app.MapPost("/Hamada", async (context) =>
             {
-                await context.Response.WriteAsync("Hello Hamada post");
+                await context.Response.WriteAsync("");
             });
 
+            app.MapGet("/XX{id:int}", async (context) =>
+            {
+                await context.Response.WriteAsync($"Id = {context.Request.RouteValues["id"]}");
+            });
+
+            /// app.MapGet("/Movies/GetMovie/{id}", async (context) =>
+            /// {
+            ///     await context.Response.WriteAsync($"Id = {context.Request.RouteValues["id"]}");
+            /// });
 
             app.MapGet("/Hamada", async (context) =>
             {
@@ -162,8 +182,12 @@ namespace Project_Structure
 
 
             app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller}/{action}/{id?}"
+                name: "default",//        1      /   2     <== should named this specific
+                                //pattern/*urlPath*/: "{controller}/{action}/{id?}"
+                pattern/*urlPath*/: "{controller=Movies}/{action=Index}/{id?}"
+                //defaults: new { Controller = "Movies", action = "Index" }
+                //constraints: new { id = new IntRouteConstraint() }
+
                 );
 
 
