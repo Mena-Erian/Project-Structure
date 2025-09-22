@@ -9,14 +9,24 @@
 <body>
 	@* Start Header *@
 	<header class="d-flex justify-content-center align-items-center mt-5">
-		<nav class="">
-			<a class="btn btn-primary" href="/Home/Index">Home</a>
-			<a class="btn btn-primary" href="/Home/AboutUs">About Us</a>
-			<a class="btn btn-primary" href="/Home/Privacy">Privacy</a>
-			<a class="btn btn-primary" href="/Home/ContentUs">Content Us</a>
+		<nav>
+			@* 1.HTML Tag *@
+			@* <a class="btn btn-primary" href="/Home/Index">Home</a> *@
 
-			<a class="btn btn-success" href="/Accounts/SignIn">Sign In</a>
-			<a class="btn btn-danger" href="/Accounts/SignUp">Sign Up</a>
+			@* 2.HTML Helpers*@
+			@Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-primary" });
+			@* @Html.BeginForm();
+			@Html.CheckBox();
+			@Html.TextBox(); *@
+
+			@* 3. Tag Helpers *@
+			@* <a class="btn btn-primary" href="/Home/AboutUs">About Us</a> *@
+
+			<a class="btn btn-primary" asp-controller="Home" asp-route-id="20" asp-action="AboutUs">About Us</a>
+			<a class="btn btn-primary" asp-controller="Home" asp-action="Privacy">Privacy</a>
+			<a class="btn btn-primary" asp-controller="Home" asp-action="ContentUs">Content Us</a>
+			<a class="btn btn-success" asp-controller="Accounts" asp-action="SignIn">Sign In</a>
+			<a class="btn btn-danger" asp-controller="Accounts" asp-action="SignUp">Sign Up</a>
 		</nav>
 	</header>
 	@RenderBody()
