@@ -5,9 +5,12 @@
         <meta name="viewport" content="width=device-width" />
         <title>Index</title>
         <!--<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />-->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css"
+        />
     </head>
     <body>
-        @* Start Header *@
         <header class="d-flex justify-content-center align-items-center mt-5">
             <nav class="">
                 <a class="btn btn-primary" href="/Home/Index">Home</a>
@@ -16,21 +19,40 @@
                 <a class="btn btn-primary" href="/Home/ContentUs">Content Us</a>
             </nav>
         </header>
-        @* Start Header *@ @* Start Body *@
 
         <section class="d-flex justify-content-center align-items-center mt-5">
             <div class="p-5 bg-primary rounded-2 text-white">
-                <h1 class="bg-danger text-center">Welcome Home Page</h1>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequatur, quia? Neque ullam ipsum temporibus accusantium,
-                    cumque magni quisquam maiores provident ipsam laborum rerum
-                    cum explicabo ad vitae in, molestiae saepe!
-                </p>
+                <h1 class="bg-success text-center">Welcome in Sign in Page</h1>
+                <form class="pt-2">
+                    <h2 class="mt-2">Sign In</h2>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="email"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="name@example.com"
+                        />
+                        <label for="floatingInput">Email address</label>
+                    </div>
+                    <div class="form-floating">
+                        <input
+                            type="password"
+                            class="form-control"
+                            id="floatingPassword"
+                            placeholder="Password"
+                        />
+                        <label for="floatingPassword">Password</label>
+                    </div>
+
+                    <button
+                        class="btn btn-warning mt-3 ms-auto d-block"
+                        type="submit"
+                    >
+                        Submit
+                    </button>
+                </form>
             </div>
         </section>
-
-        @* End Body *@
 
         <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
     </body>

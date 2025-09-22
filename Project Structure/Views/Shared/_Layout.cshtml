@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>@ViewBag.Title</title>
+	<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+	@* Start Header *@
+	<header class="d-flex justify-content-center align-items-center mt-5">
+		<nav class="">
+			<a class="btn btn-primary" href="/Home/Index">Home</a>
+			<a class="btn btn-primary" href="/Home/AboutUs">About Us</a>
+			<a class="btn btn-primary" href="/Home/Privacy">Privacy</a>
+			<a class="btn btn-primary" href="/Home/ContentUs">Content Us</a>
+
+			<a class="btn btn-success" href="/Accounts/SignIn">Sign In</a>
+			<a class="btn btn-danger" href="/Accounts/SignUp">Sign Up</a>
+		</nav>
+	</header>
+	@RenderBody()
+	<footer class="d-flex justify-content-center align-items-center mt-5">
+		<div>
+			<p>CopyRights &Copy; Codewithmena@gmail.com @DateTime.Now.Year </p>
+		</div>
+	</footer>
+
+	@*@if (@ViewBag.Title == "Home")
+		@RenderSection("Test"); *@
+
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
