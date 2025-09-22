@@ -117,7 +117,7 @@ namespace Project_Structure
 
 
             builder.Services.AddControllersWithViews();// Register MVC Required Services
-            //                                    (Controller Activation, Model Binding, Action Filter,Views, and etc.) To Dependance injection Container
+            //                                    (Controller Activation, Model Binding, Action Filter,Views,Configuration and etc.) To Dependance injection Container
 
             //builder.Services.AddRazorPages();// Register MVC Required Services
 
