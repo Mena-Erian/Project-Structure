@@ -106,7 +106,7 @@ namespace Project_Structure
     public class Program
     {
         // Entry Point
-        public static void Main(string[] args)
+        public static void Main()
         {
             var builder = WebApplication.CreateBuilder(); // Use builder Design Pattern
 
