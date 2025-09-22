@@ -134,9 +134,10 @@ namespace Project_Structure
             /// builder.Services.AddScoped<ProductService>();
 
             app.UseRouting();
+            app.UseStaticFiles();//Enables static file serving for the current request path
 
             //app.MapGet("/", () => "Hello World!");
-            app.MapGet("/Home", () => "Hello Home World!");
+            //app.MapGet("/Home", () => "Hello Home World!");
             //app.MapGet("/About", () => "Hello About World!");
             //app.MapGet("/*", () => "Hello ***********About World!");
 
@@ -184,7 +185,7 @@ namespace Project_Structure
             app.MapControllerRoute(
                 name: "default",//        1      /   2     <== should named this specific
                                 //pattern/*urlPath*/: "{controller}/{action}/{id?}"
-                pattern/*urlPath*/: "{controller=Movies}/{action=Index}/{id?}"
+                pattern/*urlPath*/: "{controller=Home}/{action=Index}/{id?}"
                 //defaults: new { Controller = "Movies", action = "Index" }
                 //constraints: new { id = new IntRouteConstraint() }
 

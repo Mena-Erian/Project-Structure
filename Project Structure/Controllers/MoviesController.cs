@@ -6,17 +6,15 @@ namespace Project_Structure.Controllers
 {
     public class MoviesController : Controller
     {
-        [FromServices] // That like Create from Constructor
-        public IConfiguration Configuration { get; set; }
+        //[FromServices] // That like Create from Constructor
+        //public IConfiguration Configuration { get; set; }
 
         #region Routing and Action Return Type
-        //private readonly IConfiguration _configuration;
-        //   public MoviesController(IConfiguration configuration) // Ask CLR for Creating Object from Class implement interface IConfiguration
-        //   {
-        //       _configuration = configuration;
-        //   }
-
-
+        private readonly IConfiguration _configuration;
+        public MoviesController(IConfiguration configuration) // Ask CLR for Creating Object from Class implement interface IConfiguration
+        {
+            _configuration = configuration;
+        }
 
 
         // Action //==>Any public Non-Static Object Member Method inside Controller
